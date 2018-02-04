@@ -1,0 +1,109 @@
+﻿{
+	"1-MonitorMail" : [
+	{
+	  "name" : "BCPMail",
+	  "enabled" : 1,
+	  "host"  : "mailserver",
+	  "email" : "email address",
+	  "pwd"	  : "email password",
+	  "datadir" : "data",
+	  "sender": [],
+	  "subject": ["BCP数据"],
+	  "days": 1
+	}
+	],
+	"2-ClearDB" : [
+       {
+        "name" : "CLR_ALL",
+        "enabled" : 1,
+        "db" : {
+          "dsn" : "DRIVER={SQL Server Native Client 11.0};SERVER=10.116.15.121,1433;DATABASE=moni;UID=sa;PWD=sa",
+      	  "prcstr" : "sp_clear_imp_tables"
+        }
+      }
+    ],
+	"3-File2DB" : [
+       {
+        "name" : "SAIC",
+        "enabled" : 1,
+        "file" : {
+      	  "fname" : "自主品牌物流状态.xls",
+      	  "sheet" : "",
+      	  "datpath" : "data",
+      	  "row" : 1,
+      	  "col" : []
+        },
+        "db" : {
+          "dsn" : "DRIVER={SQL Server Native Client 11.0};SERVER=10.116.15.121,1433;DATABASE=moni;UID=sa;PWD=sa",
+      	  "sqlstr" : "insert into imp_onway_saic(VCode, OnWayStatus, RefFile) values (?, ?, ?)"
+        },
+        "notify" : {
+          "subject" : "",
+          "recvpath": ""
+        }
+      },
+      {
+        "name" : "MAXUS",
+        "enabled" : 1,
+        "file" : {
+      	  "fname" : "大通.xls",
+      	  "sheet" : "",
+      	  "datpath" : "data",
+      	  "row" : 1,
+      	  "col" : [2,3,4,6,10]
+        },
+        "db" : {
+          "dsn" : "DRIVER={SQL Server Native Client 11.0};SERVER=10.116.15.121,1433;DATABASE=sa;UID=moni;PWD=sa",
+      	  "sqlstr" : "insert into imp_onway_maxus (Dealer, City, Province, VCode, ArriveDate, RefFile) values (?, ?, ?, ?, ?, ?)"
+        },
+        "notify" : {
+          "subject" : "",
+          "recvpath": ""
+        }
+      },
+      {
+        "name" : "BADTAG",
+        "enabled" : 1,
+        "file" : {
+      	  "fname" : "问题芯片（增量）.xls",
+      	  "sheet" : "",
+      	  "datpath" : "data",
+      	  "row" : 1,
+      	  "col" : [0]
+        },
+        "db" : {
+          "dsn" : "DRIVER={SQL Server Native Client 11.0};SERVER=10.116.15.121,1433;DATABASE=moni;UID=sa;PWD=sa",
+      	  "sqlstr" : "insert into imp_vcode_badtag (VCode, RefFile) values (?, ?)"
+        },
+        "notify" : {
+          "subject" : "",
+          "recvpath": ""
+        }
+      },
+      {
+        "name" : "ONWAYDAYS",
+        "enabled" : 1,
+        "file" : {
+      	  "fname" : "合理在途时间.xls",
+      	  "sheet" : "",
+      	  "datpath" : "data",
+      	  "row" : 1,
+      	  "col" : [1, 2]
+        },
+        "db" : {
+          "dsn" : "DRIVER={SQL Server Native Client 11.0};SERVER=10.116.15.121,1433;DATABASE=moni;UID=sa;PWD=sa",
+      	  "sqlstr" : "insert into imp_onway_days (Destination, Days, RefFile) values (?, ?, ?)"
+        },
+        "notify" : {
+          "subject" : "",
+          "recvpath": ""
+        }
+      }
+    ],
+	"4-CleanJob" : [
+      {
+        "name" : "CLEAN_JOB",
+        "enabled" : 1
+      }
+    ]
+}

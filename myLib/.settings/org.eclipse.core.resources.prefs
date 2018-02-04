@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/cfgUtil/CFGJson.py=gbk
+encoding//src/dbUtil/SQLPyodbc.py=gbk
+encoding//src/excelUtil/openpyxlWt.py=gbk
+encoding//src/excelUtil/xlrdRd.py=UTF-8
+encoding//src/excelUtil/xlwtWt.py=gbk
+encoding//src/netUtil/POP3Util.py=UTF-8
+encoding//src/netUtil/SMTPUtil.py=gbk
